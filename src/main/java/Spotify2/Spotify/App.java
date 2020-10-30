@@ -14,9 +14,6 @@ public class App
 {
     public static void main( String[] args )
     {
-        if(ConnectionBD.getConnection()!=null){
-        	System.out.println("va");
-        	System.out.println(ConnectionBD.CloseConnection());
-        }
+        
     }
 }

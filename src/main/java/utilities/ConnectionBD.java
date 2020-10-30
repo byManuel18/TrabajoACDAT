@@ -15,7 +15,7 @@ public class ConnectionBD {
 			Class.forName(c.getDriver().getDriver());
 			try {
 				conec = DriverManager.getConnection(c.getTypebdd().getType() + "//" + c.getIp() + ":" + c.getPort()
-						+ "/" + c.getNameBD() + c.getTimezone(), c.getUser(), c.getPassword());
+						+ "/" + c.getNameBD(),c.getUser(), c.getPassword());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

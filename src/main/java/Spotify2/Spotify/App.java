@@ -1,6 +1,9 @@
 package Spotify2.Spotify;
 
+import java.net.Socket;
+
 import models.Channel;
+import utilities.ConnectionBD;
 import utilities.XMLManager;
 
 /**
@@ -11,8 +14,9 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
-        Channel c=new Channel();
-        System.out.println( XMLManager.SetChanel(c));
+        if(ConnectionBD.getConnection()!=null){
+        	System.out.println("va");
+        	System.out.println(ConnectionBD.CloseConnection());
+        }
     }
 }

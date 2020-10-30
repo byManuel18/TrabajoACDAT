@@ -1,5 +1,7 @@
 package Spotify2.Spotify;
 
+import java.net.Socket;
+
 import models.Channel;
 import utilities.ConnectionBD;
 import utilities.XMLManager;
@@ -15,5 +17,6 @@ public class App
         if(ConnectionBD.getConnection()!=null){
         	ConnectionBD.CloseConnection();
         }
+        
     }
 }

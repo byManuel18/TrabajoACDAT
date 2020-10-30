@@ -1,9 +1,15 @@
 package models;
 
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import enums.Driver;
 import enums.TypeBDD;
 
+@XmlRootElement(name="CHANEL")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Channel {
 	private TypeBDD typebdd;
 	private Driver driver;

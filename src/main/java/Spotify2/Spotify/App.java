@@ -1,10 +1,12 @@
 package Spotify2.Spotify;
 
-import java.net.Socket;
 
-import models.Channel;
+import DAOS.PlayListDAO;
+import DAOS.UsersDAO;
+import models.Playlist;
+import models.User;
 import utilities.ConnectionBD;
-import utilities.XMLManager;
+
 
 /**
  * Hello world!
@@ -14,9 +16,20 @@ public class App
 {
     public static void main( String[] args )
     {
-        if(ConnectionBD.getConnection()!=null){
+
+
+
+    	Playlist pl=new PlayListDAO(1);
+
+
+
+    	System.out.println(pl);
+    	for(User p:pl.getSubscribers()){
+    		System.out.print(p);
+    	}
+
         	ConnectionBD.CloseConnection();
-        }
-        
+
+
     }
 }

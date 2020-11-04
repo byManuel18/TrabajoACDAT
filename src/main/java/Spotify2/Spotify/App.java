@@ -21,13 +21,7 @@ public class App
     public static void main( String[] args )
     {
 
-    	ArtistDAO n=new ArtistDAO(5);
-
-    	System.out.println(n.delete());
-
-    	for(Artist p:ArtistDAO.SelectAll()){
-    		System.out.println(p);
-    	}
+    	Ejecutable.main(args);
 
         ConnectionBD.CloseConnection();
 

@@ -10,7 +10,9 @@ public class Playlist{
 	private String description;
 	private User creator;
 	private Set<User> subscribers=new HashSet<User>();
+	private Set<Song> songs=new HashSet<Song>();
 	boolean synchro=false;
+	boolean synchrosong=false;
 
 	public Playlist(){
 		this(-1,"","",null);
@@ -78,6 +80,16 @@ public class Playlist{
 
 	public void setSynchro(boolean synchro) {
 		this.synchro = synchro;
+	}
+
+
+
+	public Set<Song> getSongs() {
+		return songs;
+	}
+
+	public void setSongs(Set<Song> songs) {
+		this.songs = songs;
 	}
 
 	@Override

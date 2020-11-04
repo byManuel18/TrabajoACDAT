@@ -1,8 +1,16 @@
 package models;
 
 public class Genre {
-	int id;
-	String name;
+	private int id;
+	private String name;
+
+	public Genre(){
+		this(-1,"");
+	}
+
+	public Genre(String name) {
+		this(-1,name);
+	}
 
 	public Genre(int id, String name) {
 		this.id = id;

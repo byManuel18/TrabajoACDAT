@@ -1,8 +1,12 @@
 package Spotify2.Spotify;
 
 
+import DAOS.ArtistDAO;
+import DAOS.GenreDAO;
 import DAOS.PlayListDAO;
 import DAOS.UsersDAO;
+import models.Artist;
+import models.Genre;
 import models.Playlist;
 import models.User;
 import utilities.ConnectionBD;
@@ -17,18 +21,15 @@ public class App
     public static void main( String[] args )
     {
 
+    	ArtistDAO n=new ArtistDAO(5);
 
+    	System.out.println(n.delete());
 
-    	Playlist pl=new PlayListDAO(1);
-
-
-
-    	System.out.println(pl);
-    	for(User p:pl.getSubscribers()){
-    		System.out.print(p);
+    	for(Artist p:ArtistDAO.SelectAll()){
+    		System.out.println(p);
     	}
 
-        	ConnectionBD.CloseConnection();
+        ConnectionBD.CloseConnection();
 
 
     }

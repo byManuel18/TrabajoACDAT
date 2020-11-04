@@ -1,20 +1,31 @@
 package models;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Artist {
-	int id;
-	String name;
-	String nationality;
-	String photo;
-	List<Disc> disclist;
+	private int id;
+	private String name;
+	private String nationality;
+	private String photo;
+	private Set<Disc> disclist;
+	private boolean synchro=false;
 
-	public Artist(int id, String name, String nationality, String photo, List<Disc> disclist) {
+	public Artist() {
+		this(-1, "", "", "");
+	}
+
+	public Artist(String name, String nationality, String photo){
+		this(-1,name,nationality,photo);
+	}
+
+	public Artist(int id, String name, String nationality, String photo) {
 		this.id = id;
 		this.name = name;
 		this.nationality = nationality;
 		this.photo = photo;
-		this.disclist = disclist;
+		this.disclist=new HashSet<Disc>();
+		this.synchro=false;
 	}
 
 
@@ -58,15 +69,29 @@ public class Artist {
 	}
 
 
-	public List<Disc> getDisclist() {
+	public Set<Disc> getDisclist() {
+		if(!synchro){
+
+			synchro=true;
+		}
 		return disclist;
 	}
 
 
-	public void setDisclist(List<Disc> disclist) {
+	public void setDisclist(Set<Disc> disclist) {
 		this.disclist = disclist;
 	}
 
+
+
+
+	public boolean isSynchro() {
+		return synchro;
+	}
+
+	public void setSynchro(boolean synchro) {
+		this.synchro = synchro;
+	}
 
 	@Override
 	public int hashCode() {

@@ -8,6 +8,7 @@ public enum SentenciasUsers {
 	SUBSCRIBERS("SELECT user.id, user.nombre,user.correo, user.foto,user.activo FROM usuario"
 			+ " as user JOIN suscripcion sub ON sub.id_usuario=user.id JOIN lista as"
 			+ " list ON list.id=sub.id_lista WHERE list.id=? AND user.activo=1"),
+	SELECTBYEMAIL("SELECT * FROM usuario WHERE correo=?")
 	;
 
 	private String sql="";

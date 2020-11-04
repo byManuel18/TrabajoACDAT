@@ -2,6 +2,7 @@ package enums;
 
 public enum Escenas {
 	INICIO("/views/Start"),
+	REGISTRY("/views/Registry"),
 
 	;
 	private String url;

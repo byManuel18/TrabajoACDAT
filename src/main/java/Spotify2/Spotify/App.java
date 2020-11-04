@@ -18,6 +18,7 @@ import utilities.ConnectionBD;
  */
 public class App
 {
+	private static User user=null;
     public static void main( String[] args )
     {
 
@@ -26,5 +27,11 @@ public class App
         ConnectionBD.CloseConnection();
 
 
+    }
+    public void setUser(User s){
+    	this.user=s;
+    }
+    public User getUser(){
+    	return this.user;
     }
 }

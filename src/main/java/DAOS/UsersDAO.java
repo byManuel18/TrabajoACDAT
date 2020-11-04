@@ -76,6 +76,45 @@ public class UsersDAO extends User{
 		}
 	}
 
+	public UsersDAO(String email){
+		super();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		try {
+			ps=ConnectionBD.getConnection().prepareStatement(SentenciasUsers.SELECTBYEMAIL.getSQL());
+			ps.setString(1, email);
+			rs=ps.executeQuery();
+			if(rs!=null){
+				if(rs.next()){
+					this.setId(rs.getInt("id"));
+					this.setMail(rs.getString("nombre"));
+					this.setName(email);
+					this.setPhoto(rs.getString("foto"));
+					this.setActive(rs.getBoolean("activo"));
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if(rs!=null){
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(ps!=null){
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 	public int update(){
 		int result=0;
 		PreparedStatement ps=null;

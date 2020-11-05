@@ -3,6 +3,8 @@ package models;
 import java.util.HashSet;
 import java.util.Set;
 
+import DAOS.DiscDAO;
+
 public class Artist {
 	private int id;
 	private String name;
@@ -71,7 +73,7 @@ public class Artist {
 
 	public Set<Disc> getDisclist() {
 		if(!synchro){
-
+			this.setDisclist(DiscDAO.SearchByAuthor(this));
 			synchro=true;
 		}
 		return disclist;
@@ -119,8 +121,7 @@ public class Artist {
 
 	@Override
 	public String toString() {
-		return "Artist [id=" + id + ", name=" + name + ", nationality=" + nationality + ", photo=" + photo
-				+ ", disclist=" + disclist + "]";
+		return "Artist [id=" + id + ", name=" + name + ", nationality=" + nationality + ", photo=" + photo;
 	}
 
 

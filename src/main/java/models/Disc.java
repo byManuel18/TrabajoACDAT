@@ -1,24 +1,37 @@
 package models;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Disc {
-	int id;
-	String name;
-	Artist artist;
-	String photo;
-	LocalDate date;
-	List<Song> songlist;
+	private int id;
+	private String name;
+	private Artist artist;
+	private String photo;
+	private LocalDate date;
+	private Set<Song> songlist;
+	private boolean synchro=false;
 
-	public Disc(int id, String name, Artist artist, String photo, LocalDate date, List<Song> songlist) {
+
+	public Disc() {
+		this(-1, "", null, "", null);
+	}
+
+	public Disc(String name, Artist artist, String photo, LocalDate date) {
+		this(-1, name,artist,photo,date);
+	}
+
+	public Disc(int id, String name, Artist artist, String photo, LocalDate date) {
 		this.id = id;
 		this.name = name;
 		this.artist = artist;
 		this.photo = photo;
 		this.date = date;
-		this.songlist = songlist;
+		this.songlist = new HashSet<Song>();
 	}
+
 
 	public int getId() {
 		return id;
@@ -60,12 +73,21 @@ public class Disc {
 		this.date = date;
 	}
 
-	public List<Song> getSonglist() {
+	public Set<Song> getSonglist() {
 		return songlist;
 	}
 
-	public void setSonglist(List<Song> songlist) {
+	public void setSonglist(Set<Song> songlist) {
 		this.songlist = songlist;
+	}
+
+
+	public boolean isSynchro() {
+		return synchro;
+	}
+
+	public void setSynchro(boolean synchro) {
+		this.synchro = synchro;
 	}
 
 	@Override
@@ -92,8 +114,7 @@ public class Disc {
 
 	@Override
 	public String toString() {
-		return "Disc [id=" + id + ", name=" + name + ", artist=" + artist + ", photo=" + photo + ", date=" + date
-				+ ", songlist=" + songlist + "]";
+		return "Disc [id=" + id + ", name=" + name + ", artist=" + artist + ", photo=" + photo + ", date=" + date;
 	}
 
 

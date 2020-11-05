@@ -55,6 +55,7 @@ public class XMLManager {
 			e.printStackTrace();
 			c=new Channel();
 			SetChanel(c);
+
 		}
 		return c;
 	}

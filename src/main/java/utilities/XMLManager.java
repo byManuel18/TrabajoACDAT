@@ -54,6 +54,7 @@ public class XMLManager {
 		} catch (JAXBException e) {
 			e.printStackTrace();
 			c=new Channel();
+			SetChanel(c);
 		}
 		return c;
 	}

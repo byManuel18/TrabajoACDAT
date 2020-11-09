@@ -177,4 +177,42 @@ public class GenreDAO extends Genre{
 
 		return listGenre;
 	}
+	public static boolean Exist(String  name){
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		int result=-1;
+		 try {
+			ps=ConnectionBD.getConnection().prepareStatement(SentenciasGenre.EXIST.getSQL());
+			ps.setString(1, name);
+			rs=ps.executeQuery();
+			if(rs!=null){
+				if(rs.next()){
+					result=rs.getInt("id");
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if(rs!=null){
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if(ps!=null){
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		 return result>0;
+	}
 }

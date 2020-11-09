@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CHANEL>
+    <typebdd>MySQL</typebdd>
+    <driver>MySQL</driver>
+    <nameBD>spotify2.0</nameBD>
+    <port>3306</port>
+    <timezone>?useUnicode=true&amp;amp;useJDBCCompliantTimezoneShift=true&amp;amp;useLegacyDatetimeCode=false&amp;amp;serverTimezone=UTC</timezone>
+    <user>root</user>
+    <password></password>
+    <ip>localhost</ip>
+</CHANEL>

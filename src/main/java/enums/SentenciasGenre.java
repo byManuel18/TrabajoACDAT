@@ -6,6 +6,7 @@ public enum SentenciasGenre {
 	UPDATE("UPDATE genero SET nombre=? WHERE id=?"),
 	DELETE("DELETE FROM genero WHERE id=?"),
 	SELECTALL("SELECT * FROM genero WHERE id>0"),
+	EXIST("SELECT * FROM genero WHERE nombre=?")
 	;
 
 	private String sql="";

@@ -3,6 +3,9 @@ package enums;
 public enum Escenas {
 	INICIO("/views/Start"),
 	REGISTRY("/views/Registry"),
+	ADMINISTRATION("/views/Administration"),
+	GENRE("/views/GenreView"),
+	ARTIST("/views/ArtistView"),
 
 	;
 	private String url;

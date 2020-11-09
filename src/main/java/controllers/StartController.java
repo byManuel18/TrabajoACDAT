@@ -26,6 +26,11 @@ public class StartController extends GeneralController{
 		Ejecutable.CambiarTitulo("Registry");
 	}
 	@FXML
+	private void Administration(){
+		Ejecutable.CambiarEscena(600, 400, Escenas.ADMINISTRATION);
+		Ejecutable.CambiarTitulo("Administration");
+	}
+	@FXML
 	private void GetIn(){
 		if(email_.getText().length()>0){
 			User u=new UsersDAO(email_.getText());

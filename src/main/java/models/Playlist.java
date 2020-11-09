@@ -2,6 +2,8 @@ package models;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import DAOS.SongDAO;
 import DAOS.UsersDAO;
 
 public class Playlist{
@@ -85,6 +87,10 @@ public class Playlist{
 
 
 	public Set<Song> getSongs() {
+		if(!synchrosong){
+			this.setSongs(SongDAO.SelectForPlaylist(this.id));
+			synchrosong=true;
+		}
 		return songs;
 	}
 

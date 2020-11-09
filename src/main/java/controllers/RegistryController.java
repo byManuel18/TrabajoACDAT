@@ -3,12 +3,14 @@ package controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import DAOS.UsersDAO;
 import Spotify2.Spotify.Ejecutable;
 import enums.Escenas;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import utilities.GeneralUtilities;
 
 public class RegistryController extends GeneralController{
 	@FXML
@@ -41,6 +43,53 @@ public class RegistryController extends GeneralController{
 		mail_.clear();
 		name_.clear();
 		image_.setImage(null);
+	}
+
+	@FXML
+	private void Add(){
+		boolean correct = false;
+		if(url_.getText().length()>0 && mail_.getText().length()>0 && name_.getText().length()>0){
+			if(!GeneralUtilities.ValidateMAIL(mail_.getText())){
+				mail_.clear();
+			}else{
+				if(!GeneralUtilities.ValidateURL(url_.getText())){
+					url_.clear();
+				}else{
+					correct=true;
+				}
+			}
+			if(correct){
+				UsersDAO u =new UsersDAO(mail_.getText());
+				if(u.getId()>0){
+					muestraerror("Error", "Cuenta ya existente", "     ");
+					if(!u.isActive()){
+						if(confirm("Información", "Este usuario se encuentra desactivado", "¿Desea volver a activarlo?")){
+							u.setActive(true);
+							if(u.update()>0){
+								muestrinformacion("Información", "Usuario activado", "   ");
+							}
+						}
+					}
+				}else{
+					if(confirm("Informacion","¿Desea registrar usuario?"," ")){
+						u.setActive(true);
+						u.setName(name_.getText().toUpperCase());
+						u.setMail(mail_.getText());
+						u.setPhoto(url_.getText());
+						if(u.update()>0){
+							muestrinformacion("Información", "Usuario registrado", "  ");
+							Return();
+						}else{
+							muestraerror("Error", "No se ha podido registrar", "    ");
+						}
+					}
+				}
+			}else{
+				muestraerror("Error", "Campo erróneos", "    ");
+			}
+		}else{
+			muestraerror("Error", "No dejes campos en blanco", "   ");
+		}
 	}
 
 }

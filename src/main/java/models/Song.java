@@ -1,11 +1,19 @@
 package models;
 
 public class Song {
-	int id;
-	String name;
-	int duration;
-	Genre genre;
-	Disc disc;
+	private int id;
+	private String name;
+	private int duration;
+	private Genre genre;
+	private Disc disc;
+
+	public Song(){
+		this(-1,"",0,null,null);
+	}
+
+	public Song(String name, int duration, Genre genre, Disc disc){
+		this(-1,name, duration, genre, disc);
+	}
 
 	public Song(int id, String name, int duration, Genre genre, Disc disc) {
 		this.id = id;

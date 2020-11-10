@@ -168,7 +168,13 @@ public class ArtistController extends GeneralController{
 		song_list.setItems(songlist);
 
 	}
+	@FXML
 	private void ShowAll(){
+		b_search_artist.setDisable(true);
+		busqueda_nacionalidad_artis.setSelected(false);
+		busqueda_name_artis.setSelected(false);
+		t_b_artist.setDisable(true);
+		t_b_artist.clear();
 		artistlist_.clear();
 		artistlist_.addAll(ArtistDAO.SelectAll());
 	}
@@ -469,6 +475,23 @@ public class ArtistController extends GeneralController{
 		}else{
 			t_b_artist.setDisable(true);
 			b_search_artist.setDisable(true);
+		}
+	}
+	@FXML
+	private void SearchArtist(){
+		if(busqueda_nacionalidad_artis.isSelected()){
+			if(t_b_artist.getText().length()>0){
+				ClearDisc();
+				artistlist_.clear();
+				artistlist_.addAll(ArtistDAO.SelectbyNacionalidad(t_b_artist.getText().toUpperCase()));
+			}
+
+		}else if(busqueda_name_artis.isSelected()){
+			if(t_b_artist.getText().length()>0){
+				ClearDisc();
+				artistlist_.clear();
+				artistlist_.addAll(ArtistDAO.SelectbyName(t_b_artist.getText().toUpperCase()));
+			}
 		}
 	}
 

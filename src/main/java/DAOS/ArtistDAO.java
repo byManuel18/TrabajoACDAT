@@ -140,7 +140,12 @@ public class ArtistDAO extends Artist {
 
 		return result;
 	}
-
+	public  static Set<Artist> SelectbyName(String name){
+		return Search(SentenciasArtista.SELECTBYNAME, name);
+	}
+	public  static Set<Artist> SelectbyNacionalidad(String name){
+		return Search(SentenciasArtista.SELECTBYNACIONALIDAD, name);
+	}
 	public  static Set<Artist> SelectAll(){
 		return Search(SentenciasArtista.SELECTALL, "");
 	}
@@ -151,6 +156,9 @@ public class ArtistDAO extends Artist {
 
 		try {
 			ps=ConnectionBD.getConnection().prepareStatement(sql.getSQL());
+			if(sql==SentenciasArtista.SELECTBYNAME||sql==SentenciasArtista.SELECTBYNACIONALIDAD){
+				ps.setString(1, parametro+"%");
+			}
 
 			rs=ps.executeQuery();
 			if(rs!=null){

@@ -6,6 +6,8 @@ public enum SentenciasArtista {
 	UPDATE("UPDATE artista SET nombre=?,nacionalidad=?,foto=? WHERE id=?"),
 	DELETE("DELETE FROM artista WHERE id=?"),
 	SELECTALL("SELECT * FROM artista WHERE id>0"),
+	SELECTBYNAME("SELECT * FROM artista WHERE id>0 and nombre LIKE ?"),
+	SELECTBYNACIONALIDAD("SELECT * FROM artista WHERE id>0 and nacionalidad LIKE ?"),
 	;
 
 	private String sql="";

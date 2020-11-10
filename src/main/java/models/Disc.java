@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import DAOS.SongDAO;
+
 public class Disc {
 	private int id;
 	private String name;
@@ -74,6 +76,10 @@ public class Disc {
 	}
 
 	public Set<Song> getSonglist() {
+		if(!synchro){
+			this.setSonglist(SongDAO.SelectForDisc(this));
+			synchro=true;
+		}
 		return songlist;
 	}
 

@@ -34,6 +34,7 @@ public class AdministrationController extends GeneralController{
 	private void Artist(){
 		Ejecutable.CambiarEscena(1285, 894, Escenas.ARTIST);
 		Ejecutable.CambiarTitulo("ARTIST");
+		Ejecutable.CambiarResizable(true);
 	}
 
 }

@@ -31,11 +31,15 @@ public class test {
 		SongDAO nuevo=new SongDAO(3);
 		System.out.println(nuevo.delete());
 */
-		Playlist nueva = new PlayListDAO(1);
-		for(Song s:nueva.getSongs()){
-			System.out.println(s);
+		Artist n =new ArtistDAO(1);
+		System.out.println(n);
+		for(Disc c:n.getDisclist()){
+			System.out.println(c);
+			for(Song s:c.getSonglist()){
+				System.out.println(s);
+			}
 		}
-		System.out.println(nueva.getCreator());
+
 		ConnectionBD.CloseConnection();
 	}
 }

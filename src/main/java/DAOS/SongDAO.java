@@ -148,7 +148,9 @@ public class SongDAO extends Song{
 	public static Set<Song> SelectForPlaylist(int id){
 		return Search(SentenciasSong.SELECTFORPLAYLIST,"",null,null,id);
 	}
-
+	public static Set<Song> SelectForDisc(Disc d){
+		return Search(SentenciasSong.SELECTFORDISC,"",d,null,-1);
+	}
 	private static Set<Song> Search(SentenciasSong sql, String name, Disc disc, Genre genre, int n){
 		Set<Song> listSong=new HashSet<Song>();
 
@@ -159,6 +161,8 @@ public class SongDAO extends Song{
 			ps=ConnectionBD.getConnection().prepareStatement(sql.getSQL());
 			if(sql==SentenciasSong.SELECTFORPLAYLIST){
 				ps.setInt(1, n);
+			}else if(sql==SentenciasSong.SELECTFORDISC){
+				ps.setInt(1, disc.getId());
 			}
 			rs=ps.executeQuery();
 

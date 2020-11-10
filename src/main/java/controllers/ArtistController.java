@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -30,11 +31,19 @@ import utilities.GeneralUtilities;
 
 public class ArtistController extends GeneralController{
 	@FXML
+	private RadioButton busqueda_name_artis;
+	@FXML
+	private RadioButton busqueda_nacionalidad_artis;
+	@FXML
+	private Button b_search_artist;
+	@FXML
 	private Button b_add_song;
 	@FXML
 	private Button b_clear_song;
 	@FXML
 	private Button b_edit_song;
+	@FXML
+	private TextField t_b_artist;
 	@FXML
 	private TextField name_song;
 	@FXML
@@ -111,6 +120,8 @@ public class ArtistController extends GeneralController{
 		b_clear_song.setDisable(true);
 		b_edit_song.setDisable(true);
 		genero_song.setDisable(true);
+		b_search_artist.setDisable(true);
+		t_b_artist.setDisable(true);
 		for(Genre g: GenreDAO.SelectALL()){
 			genero_song.getItems().add(g.getName());
 		}
@@ -294,6 +305,7 @@ public class ArtistController extends GeneralController{
 	private void ClearDisc(){
 		disc=null;
 		song=null;
+		songlist.clear();
 		imag_disc.setImage(null);
 		url_disc.clear();
 		name_disc.clear();
@@ -307,6 +319,7 @@ public class ArtistController extends GeneralController{
 		b_add_song.setDisable(true);
 		b_clear_song.setDisable(true);
 		b_edit_song.setDisable(true);
+
 
 
 	}
@@ -432,6 +445,30 @@ public class ArtistController extends GeneralController{
 			}
 		}else{
 			muestraerror("Error", "No se ha podido editar", "Campos vacíos o incorrectos");
+		}
+	}
+
+	@FXML
+	private void ClikSearchbyNameArtist(){
+		if(busqueda_name_artis.isSelected()){
+			busqueda_nacionalidad_artis.setSelected(false);
+			t_b_artist.setDisable(false);
+			b_search_artist.setDisable(false);
+		}else{
+			t_b_artist.setDisable(true);
+			b_search_artist.setDisable(true);
+		}
+
+	}
+	@FXML
+	private void ClikSearchbyNacionalityArtist(){
+		if(busqueda_nacionalidad_artis.isSelected()){
+			busqueda_name_artis.setSelected(false);
+			t_b_artist.setDisable(false);
+			b_search_artist.setDisable(false);
+		}else{
+			t_b_artist.setDisable(true);
+			b_search_artist.setDisable(true);
 		}
 	}
 

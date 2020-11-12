@@ -151,6 +151,9 @@ public class SongDAO extends Song{
 	public static Set<Song> SelectForDisc(Disc d){
 		return Search(SentenciasSong.SELECTFORDISC,"",d,null,-1);
 	}
+	public static Set<Song> SelectForName(String name){
+		return Search(SentenciasSong.SELECTBYNAME,name,null,null,-1);
+	}
 	private static Set<Song> Search(SentenciasSong sql, String name, Disc disc, Genre genre, int n){
 		Set<Song> listSong=new HashSet<Song>();
 
@@ -163,6 +166,8 @@ public class SongDAO extends Song{
 				ps.setInt(1, n);
 			}else if(sql==SentenciasSong.SELECTFORDISC){
 				ps.setInt(1, disc.getId());
+			}else if(sql==SentenciasSong.SELECTBYNAME){
+				ps.setString(1, name+"%");
 			}
 			rs=ps.executeQuery();
 

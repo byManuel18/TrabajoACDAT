@@ -135,8 +135,8 @@ public class ArtistController extends GeneralController{
 		});
 		this.columna_image.setCellValueFactory(eachRowData -> {
 			ImageView img=new ImageView(eachRowData.getValue().getPhoto());
-			img.setFitHeight(50);
-			img.setFitWidth(50);
+			img.setFitHeight(75);
+			img.setFitWidth(75);
 			return new SimpleObjectProperty<>(img);
 		});
 		//-------
@@ -148,8 +148,8 @@ public class ArtistController extends GeneralController{
 		});
 		this.columdiscimage.setCellValueFactory(eachRowData -> {
 			ImageView img=new ImageView(eachRowData.getValue().getPhoto());
-			img.setFitHeight(50);
-			img.setFitWidth(50);
+			img.setFitHeight(75);
+			img.setFitWidth(75);
 			return new SimpleObjectProperty<>(img);
 		});
 		//-------
@@ -183,6 +183,7 @@ public class ArtistController extends GeneralController{
 		Ejecutable.CambiarEscena(600, 400, Escenas.ADMINISTRATION);
 		Ejecutable.CambiarTitulo("Administration");
 		Ejecutable.CambiarResizable(false);
+		Ejecutable.PonerMaximizado(false);
 	}
 	@FXML
 	private void ShowArtis(){

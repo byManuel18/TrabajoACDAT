@@ -143,6 +143,9 @@ public class PlayListDAO extends Playlist{
 	public static Set<Playlist> SearchbyUserSubscriber(int id){
 		return  Search(SentenciasPlayList.SELECTFORUSERSUBSCRIBER, "", id);
 	}
+	public static Set<Playlist> SearchAllExceptUSer(int id){
+		return  Search(SentenciasPlayList.SLECTALLEXCEPTUSER, "", id);
+	}
 
 
 	private static Set<Playlist> Search(SentenciasPlayList sql,String argument, int id){
@@ -151,7 +154,7 @@ public class PlayListDAO extends Playlist{
 		ResultSet rs=null;
 		try {
 			ps=ConnectionBD.getConnection().prepareStatement(sql.getSQL());
-			if(sql==SentenciasPlayList.SELECTFORCREATOR){
+			if(sql==SentenciasPlayList.SELECTFORCREATOR||sql==SentenciasPlayList.SLECTALLEXCEPTUSER){
 				ps.setInt(1, id);
 			}else if(sql==SentenciasPlayList.SELECTFORUSERSUBSCRIBER){
 				ps.setInt(1, id);
@@ -187,6 +190,111 @@ public class PlayListDAO extends Playlist{
 		}
 
 		return playlist;
+	}
+
+	public static int addSongToPlayList(int id_song,int id_list){
+		int result=-1;
+		PreparedStatement ps=null;
+
+		try {
+			ps=ConnectionBD.getConnection().prepareStatement(SentenciasPlayList.ADDSONGTOPLAYLIST.getSQL());
+			ps.setInt(1, id_list);
+			ps.setInt(2, id_song);
+			result=ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if(ps!=null){
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return result;
+	}
+	public static int DeleteSongToPlayList(int id_song,int id_list){
+		int result=-1;
+		PreparedStatement ps=null;
+
+		try {
+			ps=ConnectionBD.getConnection().prepareStatement(SentenciasPlayList.DELETESONGFROMPLAYLIST.getSQL());
+			ps.setInt(1, id_list);
+			ps.setInt(2, id_song);
+			result=ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if(ps!=null){
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return result;
+	}
+
+	public static int Desuscribe(int id_user,int id_lista){
+		int result=-1;
+		PreparedStatement ps=null;
+
+		try {
+			ps=ConnectionBD.getConnection().prepareStatement(SentenciasPlayList.DESUSBSCRIBE.getSQL());
+			ps.setInt(1, id_user);
+			ps.setInt(2, id_lista);
+			result=ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if(ps!=null){
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+
+		return result;
+	}
+
+	public static int Subscribe(int id_user,int id_lista){
+		int result=-1;
+		PreparedStatement ps=null;
+
+		try {
+			ps=ConnectionBD.getConnection().prepareStatement(SentenciasPlayList.SUBSCRIBE.getSQL());
+			ps.setInt(1, id_user);
+			ps.setInt(2, id_lista);
+			result=ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if(ps!=null){
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+
+		return result;
 	}
 
 }

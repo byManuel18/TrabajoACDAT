@@ -47,8 +47,8 @@ public class UsersDAO extends User{
 			if(rs!=null){
 				if(rs.next()){
 					this.setId(id);
-					this.setMail(rs.getString("nombre"));
-					this.setName(rs.getString("correo"));
+					this.setMail(rs.getString("correo"));
+					this.setName(rs.getString("nombre"));
 					this.setPhoto(rs.getString("foto"));
 					this.setActive(rs.getBoolean("activo"));
 				}
@@ -87,8 +87,8 @@ public class UsersDAO extends User{
 			if(rs!=null){
 				if(rs.next()){
 					this.setId(rs.getInt("id"));
-					this.setMail(rs.getString("nombre"));
-					this.setName(email);
+					this.setMail(email);
+					this.setName(rs.getString("nombre"));
 					this.setPhoto(rs.getString("foto"));
 					this.setActive(rs.getBoolean("activo"));
 				}
@@ -213,5 +213,7 @@ public class UsersDAO extends User{
 
 		return userlist;
 	}
+
+
 
 }

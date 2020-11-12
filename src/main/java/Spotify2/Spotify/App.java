@@ -28,10 +28,10 @@ public class App
 
 
     }
-    public void setUser(User s){
-    	this.user=s;
+    public static void setUser(User s){
+    	user=s;
     }
-    public User getUser(){
-    	return this.user;
+    public static User getUser(){
+    	return user;
     }
 }

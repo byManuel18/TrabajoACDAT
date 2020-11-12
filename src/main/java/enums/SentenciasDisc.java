@@ -6,7 +6,8 @@ public enum SentenciasDisc {
 	UPDATE("UPDATE disco SET nombre=?, foto=?, fecha_produccion=? WHERE id=?"),
 	DELETE("DELETE FROM disco WHERE id=?"),
 	SELECTALL("SELECT * FROM disco"),
-	SELECTBYAUTHOR("SELECT * FROM disco WHERE id_artista=?")
+	SELECTBYAUTHOR("SELECT * FROM disco WHERE id_artista=?"),
+	SELECTBYNAME("SELECT * FROM disco WHERE nombre LIKE ?")
 	;
 	private String sql="";
 

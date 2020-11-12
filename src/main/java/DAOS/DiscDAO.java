@@ -164,8 +164,13 @@ public class DiscDAO extends Disc{
 
 		return Search(SentenciasDisc.SELECTBYAUTHOR, -1, artist, "", null);
 	}
+	public static Set<Disc> SearchByName(String name){
 
-	private static Set<Disc> Search(SentenciasDisc sent, int id, Artist artista, String arg, LocalDate date){
+
+		return Search(SentenciasDisc.SELECTBYNAME, -1, null, name, null);
+	}
+
+	private static Set<Disc> Search(SentenciasDisc sent, int id, Artist artista, String argumentos, LocalDate date){
 		Set<Disc> listadisc=new HashSet<Disc>();
 
 		PreparedStatement ps=null;
@@ -173,9 +178,11 @@ public class DiscDAO extends Disc{
 
 
 			try {
+				ps=ConnectionBD.getConnection().prepareStatement(sent.getSQL());
 				if(sent==SentenciasDisc.SELECTBYAUTHOR){
-					ps=ConnectionBD.getConnection().prepareStatement(sent.getSQL());
 					ps.setInt(1, artista.getId());
+				}else if(sent==SentenciasDisc.SELECTBYNAME){
+					ps.setString(1, argumentos+"%");
 				}
 				rs=ps.executeQuery();
 
@@ -185,7 +192,8 @@ public class DiscDAO extends Disc{
 						if(rs.getDate("fecha_produccion")!=null){
 							fecha=rs.getDate("fecha_produccion").toLocalDate();
 						}
-						Disc d= new Disc(rs.getInt("id"), rs.getString("nombre"), artista, rs.getString("foto"), fecha);
+						Artist a=new ArtistDAO(rs.getInt("id_artista"));
+						Disc d= new Disc(rs.getInt("id"), rs.getString("nombre"), a, rs.getString("foto"), fecha);
 						listadisc.add(d);
 					}
 				}

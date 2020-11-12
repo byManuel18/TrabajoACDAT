@@ -30,6 +30,14 @@ public class User {
 		this.active=active;
 	}
 
+	public boolean isSynchro() {
+		return synchro;
+	}
+
+	public void setSynchro(boolean synchro) {
+		this.synchro = synchro;
+	}
+
 	public int getId() {
 		return id;
 	}

@@ -10,6 +10,12 @@ public enum SentenciasPlayList {
 	DELETE("DELETE  FROM lista WHERE id=?"),
 	INSERT("INSERT INTO lista(nombre,descripcion,id_usuario) VALUES(?,?,?)"),
 	UPDATE("UPDATE lista SET nombre=?,descripcion=?, WHERE id=?"),
+	ADDSONGTOPLAYLIST("INSERT INTO lista_cancion(id_lista,id_cancion) VALUES(?,?)"),
+	DELETESONGFROMPLAYLIST("DELETE FROM lista_cancion WHERE id_lista=? AND id_cancion=?"),
+	SLECTALLEXCEPTUSER("SELECT * FROM lista WHERE id_usuario !=?"),
+	SUBSCRIBE("INSERT INTO suscripcion(id_usuario,id_lista) VALUES(?,?)"),
+	DESUSBSCRIBE("DELETE FROM suscripcion WHERE id_usuario=? AND id_lista=?"),
+
 	;
 
 	private String sql = "";

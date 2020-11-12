@@ -36,10 +36,10 @@
         </rowConstraints>
          <children>
             <Label text="INICIO DE SESIÓN" GridPane.halignment="CENTER" />
-            <TextField alignment="CENTER" maxWidth="-Infinity" prefHeight="31.0" prefWidth="364.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <TextField fx:id="email_" alignment="CENTER" maxWidth="-Infinity" onAction="#GetIn" prefHeight="31.0" prefWidth="364.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <children>
-                  <Button mnemonicParsing="false" text="Iniciar" />
+                  <Button mnemonicParsing="false" onAction="#GetIn" text="Iniciar" />
                   <Button mnemonicParsing="false" onAction="#Registry" text="Registrarse" />
                </children>
             </HBox>

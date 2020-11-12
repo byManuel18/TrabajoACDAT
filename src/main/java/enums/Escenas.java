@@ -6,6 +6,7 @@ public enum Escenas {
 	ADMINISTRATION("/views/Administration"),
 	GENRE("/views/GenreView"),
 	ARTIST("/views/ArtistView"),
+	USERVIEW("/views/UserView"),
 
 	;
 	private String url;

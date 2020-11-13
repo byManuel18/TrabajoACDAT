@@ -700,6 +700,38 @@ public class UserViewController extends GeneralController{
 		}
 
 	}
+	@FXML
+	private void OnClikSearhByNameSus(){
+
+		if(radio_by_name.isSelected()){
+			radio_by_creator.setSelected(false);
+		}
+
+	}
+	@FXML
+	private void OnClikSearhByAuthorSus(){
+
+		if(radio_by_creator.isSelected()){
+			radio_by_name.setSelected(false);
+		}
+
+	}
+	@FXML
+	private void SearchSus(){
+		if(radio_by_name.isSelected()){
+			if(search_name_playtosuscribe.getText().length()>0){
+				allplaylist.clear();
+				allplaylist.addAll(PlayListDAO.SearchAllExceptUSerAndNameList(App.getUser().getId(), search_name_playtosuscribe.getText().toUpperCase()));
+
+			}
+
+		}else if(radio_by_creator.isSelected()){
+			if(search_name_playtosuscribe.getText().length()>0){
+				allplaylist.clear();
+				allplaylist.addAll(PlayListDAO.SearchAllExceptUSerAndNameCreator(App.getUser().getId(), search_name_playtosuscribe.getText().toUpperCase()));
+			}
+		}
+	}
 
 
 

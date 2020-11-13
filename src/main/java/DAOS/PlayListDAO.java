@@ -146,6 +146,13 @@ public class PlayListDAO extends Playlist{
 	public static Set<Playlist> SearchAllExceptUSer(int id){
 		return  Search(SentenciasPlayList.SLECTALLEXCEPTUSER, "", id);
 	}
+	public static Set<Playlist> SearchAllExceptUSerAndNameList(int id,String name){
+		return  Search(SentenciasPlayList.SLECTALLEXCEPTUSERANDNAME, name, id);
+	}
+	public static Set<Playlist> SearchAllExceptUSerAndNameCreator(int id,String name){
+		return  Search(SentenciasPlayList.SLECTALLEXCEPTUSERANDNAMEFROMCREATOR, name, id);
+	}
+
 
 
 	private static Set<Playlist> Search(SentenciasPlayList sql,String argument, int id){
@@ -158,6 +165,9 @@ public class PlayListDAO extends Playlist{
 				ps.setInt(1, id);
 			}else if(sql==SentenciasPlayList.SELECTFORUSERSUBSCRIBER){
 				ps.setInt(1, id);
+			}else if(sql==SentenciasPlayList.SLECTALLEXCEPTUSERANDNAME||sql==SentenciasPlayList.SLECTALLEXCEPTUSERANDNAMEFROMCREATOR){
+				ps.setInt(1, id);
+				ps.setString(2, argument+"%");
 			}
 			rs=ps.executeQuery();
 			if(rs!=null){

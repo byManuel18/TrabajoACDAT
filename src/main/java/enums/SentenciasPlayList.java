@@ -13,9 +13,11 @@ public enum SentenciasPlayList {
 	ADDSONGTOPLAYLIST("INSERT INTO lista_cancion(id_lista,id_cancion) VALUES(?,?)"),
 	DELETESONGFROMPLAYLIST("DELETE FROM lista_cancion WHERE id_lista=? AND id_cancion=?"),
 	SLECTALLEXCEPTUSER("SELECT * FROM lista WHERE id_usuario !=?"),
+	SLECTALLEXCEPTUSERANDNAME("SELECT * FROM lista WHERE id_usuario !=? AND nombre LIKE ?"),
 	SUBSCRIBE("INSERT INTO suscripcion(id_usuario,id_lista) VALUES(?,?)"),
 	DESUSBSCRIBE("DELETE FROM suscripcion WHERE id_usuario=? AND id_lista=?"),
-
+	SLECTALLEXCEPTUSERANDNAMEFROMCREATOR("SELECT l.nombre,l.id,l.descripcion,l.id_usuario FROM lista"
+			+ " AS l JOIN usuario AS u ON l.id_usuario=u.id WHERE l.id_usuario!=? AND u.nombre LIKE ?"),
 	;
 
 	private String sql = "";

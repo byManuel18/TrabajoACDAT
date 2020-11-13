@@ -471,6 +471,9 @@ public class UserViewController extends GeneralController{
 	private void ReLoad(){
 		if(playlist_user_principal!=null&&playlistsubs_principal!=null){
 			playlist_selected=null;
+			if(lista_song_mipplaylist_edit!=null){
+				lista_song_mipplaylist_edit.clear();
+			}
 			songlist_user_principal.clear();
 			listsongsubscr_principal.clear();
 			playlist_user_principal.clear();
@@ -489,12 +492,7 @@ public class UserViewController extends GeneralController{
 			list_disc_misplaylist_edit=FXCollections.observableArrayList();
 			lista_sog_toadd=FXCollections.observableArrayList();
 			ShowAllArtist();
-			/*
-			 * playlist_user_principal.clear();
-			songlist_user_principal.clear();
-			playlistsubs_principal.clear();
-			listsongsubscr_principal.clear();
-			 */
+
 			this.c_name_artis.setCellValueFactory(eachRowData -> {
 				return new SimpleObjectProperty<>(eachRowData.getValue().getName());
 			});
@@ -574,7 +572,9 @@ public class UserViewController extends GeneralController{
 				if(confirm("Información", "¿Agregar canción a la lista?", "  ")){
 					if(PlayListDAO.addSongToPlayList(s.getId(), playlist_selected.getId())>0){
 						lista_song_mipplaylist_edit.add(s);
+						ShowListasUser();
 						muestrinformacion("Información", "Canción agregada a la playlist", "  ");
+
 
 					}else{
 						muestraerror("Error", "Error en la base de datos", "Comprueba que la canción no esté ya incluida");
@@ -585,14 +585,30 @@ public class UserViewController extends GeneralController{
 
 	}
 	@FXML
+	private void AddAllSongOfDisc(){
+		Disc d=table_disc_misplaylist_edit.getSelectionModel().getSelectedItem();
+		if(d!=null){
+			if(confirm("Información", "¿Agregar todo el disco a la PlayList?", "  ")){
+				for(Song s:d.getSonglist()){
+					if(PlayListDAO.addSongToPlayList(s.getId(), playlist_selected.getId())>0){
+						lista_song_mipplaylist_edit.add(s);
+					}
+
+				}
+				ShowListasUser();
+
+			}
+		}
+	}
+	@FXML
 	private void DeleteSongToList(){
-		System.out.print("Entra");
 		if(playlist_selected!=null){
 			Song s=table_song_playlistedit.getSelectionModel().getSelectedItem();
 			if(s!=null){
 				if(confirm("Información","¿Desea borrar la canción de la PlayList?", "   ")){
 					if(PlayListDAO.DeleteSongToPlayList(s.getId(), playlist_selected.getId())>0){
 						lista_song_mipplaylist_edit.remove(s);
+						ShowListasUser();
 						muestrinformacion("Información", "Canción borrada de la playlist", "  ");
 					}else{
 						muestraerror("Error", "Error en la base de datos", " ");
@@ -684,6 +700,7 @@ public class UserViewController extends GeneralController{
 		}
 
 	}
+
 
 
 }

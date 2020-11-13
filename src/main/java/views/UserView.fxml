@@ -463,7 +463,7 @@
                                                                         <VBox alignment="CENTER" prefHeight="322.0" prefWidth="84.0" spacing="10.0" BorderPane.alignment="CENTER">
                                                                            <children>
                                                                               <Button mnemonicParsing="false" onAction="#ShowSongDisc" text="Ver" />
-                                                                              <Button mnemonicParsing="false" text="Insert All" />
+                                                                              <Button mnemonicParsing="false" onAction="#AddAllSongOfDisc" text="Insert All" />
                                                                            </children>
                                                                         </VBox>
                                                                      </right>

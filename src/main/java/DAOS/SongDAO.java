@@ -14,21 +14,43 @@ import utilities.ConnectionBD;
 
 public class SongDAO extends Song{
 
+	/**
+	 * Default constructor
+	 */
 	public SongDAO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * full constructor
+	 * @param id(int): song id
+	 * @param name(String): song name
+	 * @param duration(int): song duration
+	 * @param genre(Genre): song genre
+	 * @param disc(Disc): song disc
+	 */
 	public SongDAO(int id, String name, int duration, Genre genre, Disc disc) {
 		super(id, name, duration, genre, disc);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * constructor without id
+	 * @param name(String): song name
+	 * @param duration(int): song duration
+	 * @param genre(Genre): song genre
+	 * @param disc(Disc): song disc
+	 */
 	public SongDAO(String name, int duration, Genre genre, Disc disc) {
 		super(name, duration, genre, disc);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Constructor that receives a song
+	 * @param s(Song)
+	 */
 	public SongDAO(Song s){
 		this.setId(s.getId());
 		this.setName(s.getName());
@@ -37,6 +59,10 @@ public class SongDAO extends Song{
 		this.setDisc(s.getDisc());
 	}
 
+	/**
+	 * Select a song from the database based on the parameter id
+	 * @param id(int): song id
+	 */
 	public SongDAO(int id){
 		super();
 		PreparedStatement ps= null;
@@ -79,6 +105,11 @@ public class SongDAO extends Song{
 		}
 	}
 
+	/**
+	 * According the song id, update or insert: if id is -1, insert song
+	 * if id is greater than 0, update song
+	 * @return int: 1 if has been updated or inserted, 0 if didn't work, -1 if error
+	 */
 	public int update(){
 		int result=-1;
 
@@ -125,6 +156,10 @@ public class SongDAO extends Song{
 		return result;
 	}
 
+	/**
+	 * According the song id, delete that song form the database
+	 * @return int: 1 if the song has been deleted, 0 if didn't work, -1 if error
+	 */
 	public int delete(){
 		int result=-1;
 
@@ -141,19 +176,50 @@ public class SongDAO extends Song{
 		return result;
 	}
 
+	/**
+	 * Search all songs
+	 * @return Set<Song>: all songs
+	 */
 	public static Set<Song> SelectAll(){
 		return Search(SentenciasSong.SELECTALL,"",null,null,-1);
 	}
 
+	/**
+	 * Search songs from a playlist
+	 * @param id(int): playlist id
+	 * @return Set<Song>: songs selected from a playlist
+	 */
 	public static Set<Song> SelectForPlaylist(int id){
 		return Search(SentenciasSong.SELECTFORPLAYLIST,"",null,null,id);
 	}
+
+	/**
+	 * Search songs from a disc
+	 * @param d(Disc)
+	 * @return Set<Song>: songs selected from a disc
+	 */
 	public static Set<Song> SelectForDisc(Disc d){
 		return Search(SentenciasSong.SELECTFORDISC,"",d,null,-1);
 	}
+
+	/**
+	 * Search songs by name
+	 * @param name(String): song name
+	 * @return Set<Song>: songs selected by name
+	 */
 	public static Set<Song> SelectForName(String name){
 		return Search(SentenciasSong.SELECTBYNAME,name,null,null,-1);
 	}
+
+	/**
+	 * Search songs depending the statement and parameters
+	 * @param sql(SentenciasSong): statement by want to search
+	 * @param name(String): song name
+	 * @param disc(Disc): song disc
+	 * @param genre(Genre): song genre
+	 * @param n(int): playlist id
+	 * @return Set<Song>: songs selected based on the statement
+	 */
 	private static Set<Song> Search(SentenciasSong sql, String name, Disc disc, Genre genre, int n){
 		Set<Song> listSong=new HashSet<Song>();
 

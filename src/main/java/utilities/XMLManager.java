@@ -16,6 +16,11 @@ public class XMLManager {
 
 	private static String FILE="Chanel.xml";
 
+	/**
+	 * Insert channel into XML(database)
+	 * @param c(Channel)
+	 * @return Boolean
+	 */
 	public static boolean SetChanel(Channel c){
 		boolean valid=false;
 		JAXBContext context;
@@ -43,6 +48,10 @@ public class XMLManager {
 		return valid;
 	}
 
+	/**
+	 * Read XML (database)
+	 * @return Channel
+	 */
 	public static Channel GetChannel(){
 		Channel c=null;
 		JAXBContext context;

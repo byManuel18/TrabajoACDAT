@@ -10,6 +10,9 @@ public class ConnectionBD {
 	private  static Channel c = XMLManager.GetChannel();
 	private  static Connection conec = null;
 
+	/**
+	 * Do the connection to the database
+	 */
 	private static void Conect() {
 		try {
 			Class.forName(c.getDriver().getDriver());
@@ -26,6 +29,10 @@ public class ConnectionBD {
 		}
 	}
 
+	/**
+	 * if the connection is null, call Conect();
+	 * @return Connection
+	 */
 	public static Connection getConnection(){
 		if(conec==null){
 			Conect();
@@ -33,11 +40,16 @@ public class ConnectionBD {
 		return conec;
 	}
 
+	/**
+	 * if the connection isn't null, close it
+	 * @return Boolean: if close the connection: true
+	 */
 	public static boolean CloseConnection(){
 		boolean closed=false;
 		if(conec!=null){
 			try {
 				conec.close();
+				closed=true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

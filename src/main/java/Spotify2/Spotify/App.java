@@ -11,11 +11,6 @@ import models.Playlist;
 import models.User;
 import utilities.ConnectionBD;
 
-
-/**
- * Hello world!
- *
- */
 public class App
 {
 	private static User user=null;

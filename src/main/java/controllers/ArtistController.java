@@ -415,7 +415,7 @@ public class ArtistController extends GeneralController{
 					name_song.clear();
 					duracion_song.clear();
 					genero_song.setValue(null);
-					muestrinformacion("Información", "Disco añadido correctamente", "   ");
+					muestrinformacion("Información", "Canción añadida correctamente", "   ");
 				}else{
 					muestraerror("Error", "No se ha podido crear", "Problema con la base de datos");
 				}

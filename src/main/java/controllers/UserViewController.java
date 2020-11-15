@@ -688,7 +688,7 @@ public class UserViewController extends GeneralController{
 	private void Sub(){
 		Playlist pl=table_allplylist.getSelectionModel().getSelectedItem();
 		if(pl!=null){
-			if(confirm("Información", "¿Desuscribirse de la PlayList?", "  " )){
+			if(confirm("Información", "¿Suscribirse a la PlayList?", "  " )){
 				if(PlayListDAO.Subscribe(App.getUser().getId(), pl.getId())>0){
 					lista_allmysubs_edit.add(pl);
 					App.getUser().setSynchro(false);

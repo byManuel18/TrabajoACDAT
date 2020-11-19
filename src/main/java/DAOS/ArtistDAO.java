@@ -231,4 +231,43 @@ public class ArtistDAO extends Artist {
 		return listArtist;
 	}
 
+	public static boolean existArtist(String s){
+		boolean result=false;
+
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+
+		try{
+			ps=ConnectionBD.getConnection().prepareStatement(SentenciasArtista.EXIST.getSQL());
+			ps.setString(1, s);
+			rs=ps.executeQuery();
+			if(rs!=null){
+				if(rs.next()){
+					result=true;
+				}
+			}
+		}catch (SQLException e) {
+			// TODO: handle exception
+		}finally {
+			if(rs!=null){
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(ps!=null){
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return result;
+	}
+
 }

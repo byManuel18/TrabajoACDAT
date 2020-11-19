@@ -250,4 +250,45 @@ public class SongDAO extends Song{
 
 		return listSong;
 	}
+
+	public static boolean ExistSong(int id_disc, String n){
+		boolean result=false;
+
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+
+		try {
+			ps=ConnectionBD.getConnection().prepareStatement(SentenciasSong.EXIST.getSQL());
+			ps.setInt(1, id_disc);
+			ps.setString(2, n);
+			rs=ps.executeQuery();
+			if(rs!=null){
+				if(rs.next()){
+					result=true;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if(rs!=null){
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(ps!=null){
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return result;
+	}
 }

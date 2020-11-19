@@ -407,4 +407,43 @@ public class PlayListDAO extends Playlist{
 		return result;
 	}
 
+	public static boolean ExistSameName(int id, String n){
+		boolean result=false;
+		PreparedStatement ps = null;
+		ResultSet rs=null;
+
+		try {
+			ps=ConnectionBD.getConnection().prepareStatement(SentenciasPlayList.EXIST.getSQL());
+			ps.setInt(1, id);
+			ps.setString(2, n);
+			rs=ps.executeQuery();
+			if(rs!=null){
+				if(rs.next()){
+					result=true;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if(rs!=null){
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(ps!=null){
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return result;
+	}
 }

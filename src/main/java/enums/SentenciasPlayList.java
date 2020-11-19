@@ -18,6 +18,7 @@ public enum SentenciasPlayList {
 	DESUSBSCRIBE("DELETE FROM suscripcion WHERE id_usuario=? AND id_lista=?"),
 	SLECTALLEXCEPTUSERANDNAMEFROMCREATOR("SELECT l.nombre,l.id,l.descripcion,l.id_usuario FROM lista"
 			+ " AS l JOIN usuario AS u ON l.id_usuario=u.id WHERE l.id_usuario!=? AND u.nombre LIKE ?"),
+	EXIST("SELECT * FROM lista WHERE id_usuario=? AND nombre=?")
 	;
 
 	private String sql = "";

@@ -377,18 +377,22 @@ public class UserViewController extends GeneralController{
 	@FXML
 	private void AddPlayList(){
 		if(name_new_playlist.getText().length()>0&&descripcion_new_playlist.getText().length()>0){
-			if(confirm("Informacion", "¿Crear Play List?", "  ")){
-				PlayListDAO insert=new PlayListDAO(name_new_playlist.getText().toUpperCase(),
-						descripcion_new_playlist.getText().toUpperCase(), App.getUser());
-				if(insert.update()>0){
-					App.getUser().setSynchro(false);
-					ShowListasUser();
-					muestrinformacion("Informacion", "Play List creada", "  ");
-					name_new_playlist.clear();
-					descripcion_new_playlist.clear();
-				}else{
-					muestraerror("Error", "Error con la base de datos", "  ");
+			if(!PlayListDAO.ExistSameName(App.getUser().getId(), name_new_playlist.getText().toUpperCase())){
+				if(confirm("Informacion", "¿Crear Play List?", "  ")){
+					PlayListDAO insert=new PlayListDAO(name_new_playlist.getText().toUpperCase(),
+							descripcion_new_playlist.getText().toUpperCase(), App.getUser());
+					if(insert.update()>0){
+						App.getUser().setSynchro(false);
+						ShowListasUser();
+						muestrinformacion("Informacion", "Play List creada", "  ");
+						name_new_playlist.clear();
+						descripcion_new_playlist.clear();
+					}else{
+						muestraerror("Error", "Error con la base de datos", "  ");
+					}
 				}
+			}else{
+				muestraerror("Error", "Ya creaste una Playlist con ese nombre", "  ");
 			}
 		}else{
 			muestraerror("Error", "Campos vacíos", "  ");

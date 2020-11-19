@@ -7,7 +7,8 @@ public enum SentenciasDisc {
 	DELETE("DELETE FROM disco WHERE id=?"),
 	SELECTALL("SELECT * FROM disco"),
 	SELECTBYAUTHOR("SELECT * FROM disco WHERE id_artista=?"),
-	SELECTBYNAME("SELECT * FROM disco WHERE nombre LIKE ?")
+	SELECTBYNAME("SELECT * FROM disco WHERE nombre LIKE ?"),
+	EXIST("SELECT * FROM disco WHERE id_artista=? AND nombre=?"),
 	;
 	private String sql="";
 

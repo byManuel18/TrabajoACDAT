@@ -257,4 +257,44 @@ public class DiscDAO extends Disc{
 
 		return listadisc;
 	}
+
+	public static boolean ExistDisc(String n, int id_artist){
+		boolean result=false;
+
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		try {
+			ps=ConnectionBD.getConnection().prepareStatement(SentenciasDisc.EXIST.getSQL());
+			ps.setInt(1, id_artist);
+			ps.setString(2, n);
+			rs=ps.executeQuery();
+			if(rs!=null){
+				if(rs.next()){
+					result=true;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if(rs!=null){
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(ps!=null){
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return result;
+	}
 }

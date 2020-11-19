@@ -8,6 +8,7 @@ public enum SentenciasArtista {
 	SELECTALL("SELECT * FROM artista WHERE id>0"),
 	SELECTBYNAME("SELECT * FROM artista WHERE id>0 and nombre LIKE ?"),
 	SELECTBYNACIONALIDAD("SELECT * FROM artista WHERE id>0 and nacionalidad LIKE ?"),
+	EXIST("SELECT id FROM artista WHERE nombre=?"),
 	;
 
 	private String sql="";

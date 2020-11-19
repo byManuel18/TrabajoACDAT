@@ -29,7 +29,7 @@ import models.Genre;
 import models.Song;
 import utilities.GeneralUtilities;
 
-public class ArtistController extends GeneralController{
+public class ArtistController extends GeneralController {
 	@FXML
 	private RadioButton busqueda_name_artis;
 	@FXML
@@ -83,13 +83,13 @@ public class ArtistController extends GeneralController{
 	@FXML
 	private javafx.scene.control.TableColumn<Artist, String> columna_name;
 	@FXML
-	private javafx.scene.control.TableColumn<Artist,String> columna_nacionalidad;
+	private javafx.scene.control.TableColumn<Artist, String> columna_nacionalidad;
 	@FXML
 	private TableView<Disc> dist_table;
 	@FXML
 	private TableColumn<Disc, String> columdiscname;
 	@FXML
-	private TableColumn<Disc,LocalDate> columdiscfecha;
+	private TableColumn<Disc, LocalDate> columdiscfecha;
 	@FXML
 	private TableColumn<Disc, ImageView> columdiscimage;
 
@@ -101,17 +101,18 @@ public class ArtistController extends GeneralController{
 	private TableColumn<Song, String> cgenero_song;
 	@FXML
 	private TableColumn<Song, Integer> cduracion_song;
-	private Artist get=null;
-	private Disc disc=null;
-	private Song song=null;
+	private Artist get = null;
+	private Disc disc = null;
+	private Song song = null;
 	private ObservableList<Artist> artistlist_;
 	private ObservableList<Disc> discarlist;
 	private ObservableList<Song> songlist;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		artistlist_=FXCollections.observableArrayList();
-		discarlist=FXCollections.observableArrayList();
-		songlist=FXCollections.observableArrayList();
+		artistlist_ = FXCollections.observableArrayList();
+		discarlist = FXCollections.observableArrayList();
+		songlist = FXCollections.observableArrayList();
 		b_edit.setDisable(true);
 		b_add_disc.setDisable(true);
 		b_clear_disc.setDisable(true);
@@ -122,7 +123,7 @@ public class ArtistController extends GeneralController{
 		genero_song.setDisable(true);
 		b_search_artist.setDisable(true);
 		t_b_artist.setDisable(true);
-		for(Genre g: GenreDAO.SelectALL()){
+		for (Genre g : GenreDAO.SelectALL()) {
 			genero_song.getItems().add(g.getName());
 		}
 		ShowAll();
@@ -134,12 +135,12 @@ public class ArtistController extends GeneralController{
 			return new SimpleObjectProperty<>(eachRowData.getValue().getNationality());
 		});
 		this.columna_image.setCellValueFactory(eachRowData -> {
-			ImageView img=new ImageView(eachRowData.getValue().getPhoto());
+			ImageView img = new ImageView(eachRowData.getValue().getPhoto());
 			img.setFitHeight(75);
 			img.setFitWidth(75);
 			return new SimpleObjectProperty<>(img);
 		});
-		//-------
+		// -------
 		this.columdiscname.setCellValueFactory(eachRowData -> {
 			return new SimpleObjectProperty<>(eachRowData.getValue().getName());
 		});
@@ -147,12 +148,12 @@ public class ArtistController extends GeneralController{
 			return new SimpleObjectProperty<>(eachRowData.getValue().getDate());
 		});
 		this.columdiscimage.setCellValueFactory(eachRowData -> {
-			ImageView img=new ImageView(eachRowData.getValue().getPhoto());
+			ImageView img = new ImageView(eachRowData.getValue().getPhoto());
 			img.setFitHeight(75);
 			img.setFitWidth(75);
 			return new SimpleObjectProperty<>(img);
 		});
-		//-------
+		// -------
 		this.cname_song.setCellValueFactory(eachRowData -> {
 			return new SimpleObjectProperty<>(eachRowData.getValue().getName());
 		});
@@ -168,8 +169,9 @@ public class ArtistController extends GeneralController{
 		song_list.setItems(songlist);
 
 	}
+
 	@FXML
-	private void ShowAll(){
+	private void ShowAll() {
 		b_search_artist.setDisable(true);
 		busqueda_nacionalidad_artis.setSelected(false);
 		busqueda_name_artis.setSelected(false);
@@ -178,17 +180,19 @@ public class ArtistController extends GeneralController{
 		artistlist_.clear();
 		artistlist_.addAll(ArtistDAO.SelectAll());
 	}
+
 	@FXML
-	public void Return(){
+	public void Return() {
 		Ejecutable.CambiarEscena(600, 400, Escenas.ADMINISTRATION);
 		Ejecutable.CambiarTitulo("Administration");
 		Ejecutable.CambiarResizable(false);
 		Ejecutable.PonerMaximizado(false);
 	}
+
 	@FXML
-	private void ShowArtis(){
-		get=artisttamble.getSelectionModel().getSelectedItem();
-		if(get!=null){
+	private void ShowArtis() {
+		get = artisttamble.getSelectionModel().getSelectedItem();
+		if (get != null) {
 			imge_artist.setImage(new Image(get.getPhoto()));
 			url_artist.setText(get.getPhoto());
 			name_artist.setText(get.getName());
@@ -196,8 +200,8 @@ public class ArtistController extends GeneralController{
 			discarlist.clear();
 			discarlist.addAll(get.getDisclist());
 			songlist.clear();
-			disc=null;
-			song=null;
+			disc = null;
+			song = null;
 			b_edit.setDisable(false);
 			b_add.setDisable(true);
 			b_clear_disc.setDisable(false);
@@ -209,11 +213,12 @@ public class ArtistController extends GeneralController{
 
 		}
 	}
+
 	@FXML
-	private void ShowDisc(){
-		disc=dist_table.getSelectionModel().getSelectedItem();
-		if(disc!=null){
-			song=null;
+	private void ShowDisc() {
+		disc = dist_table.getSelectionModel().getSelectedItem();
+		if (disc != null) {
+			song = null;
 			songlist.clear();
 			songlist.addAll(SongDAO.SelectForDisc(disc));
 			imag_disc.setImage(new Image(disc.getPhoto()));
@@ -232,13 +237,14 @@ public class ArtistController extends GeneralController{
 
 		}
 	}
+
 	@FXML
-	private void ClearArtist(){
+	private void ClearArtist() {
 		b_edit.setDisable(true);
 		b_add.setDisable(false);
-		get=null;
-		disc=null;
-		song=null;
+		get = null;
+		disc = null;
+		song = null;
 		discarlist.clear();
 		songlist.clear();
 		imge_artist.setImage(null);
@@ -261,57 +267,100 @@ public class ArtistController extends GeneralController{
 		b_edit_song.setDisable(true);
 
 	}
+
 	@FXML
-	private void EditArtist(){
-		if(GeneralUtilities.ValidateURL(url_artist.getText())&&name_artist.getText().length()>0&&nacionaliti_artist.getText().length()>0){
-			if(confirm("Información","¿Seguro que desea editar?", "   ")){
+	private void EditArtist() {
+		if (GeneralUtilities.ValidateURL(url_artist.getText()) && name_artist.getText().length() > 0
+				&& nacionaliti_artist.getText().length() > 0) {
+			boolean procede = false;
+			if (name_artist.getText().toUpperCase().equals(get.getName())) {
+				if (confirm("información", "¿Editar artista?", "   ")) {
+					procede = true;
+				}
+			} else {
+				if (!ArtistDAO.existArtist(name_artist.getText().toUpperCase())) {
+					if (confirm("información", "¿Editar artista?", "   ")) {
+						procede = true;
+					}
+				}else{
+					muestraerror("Error", "No se ha podido editar", "Artista existente");
+				}
+			}
+
+			if (procede) {
 				get.setName(name_artist.getText().toUpperCase());
 				get.setNationality(nacionaliti_artist.getText().toUpperCase());
 				get.setPhoto(url_artist.getText());
-				ArtistDAO update=new ArtistDAO(get);
-				if(update.update()>0){
+				ArtistDAO update = new ArtistDAO(get);
+				if (update.update() > 0) {
 					ShowAll();
 					muestrinformacion("Información", "Artista editado correctamente", "   ");
-				}else{
+				} else {
 					muestraerror("Error", "No se ha podido editar", "Problema con la base de datos");
 				}
 			}
-		}else{
+		} else {
 			muestraerror("Error", "No se ha podido editar", "Campos vacíos o incorrectos");
 		}
 	}
+
 	@FXML
-	private void AddArtist(){
-		if(GeneralUtilities.ValidateURL(url_artist.getText())&&name_artist.getText().length()>0&&nacionaliti_artist.getText().length()>0){
-			if(confirm("Información","¿Seguro que desea añadir Artista?", "   ")){
-				ArtistDAO toadd=new ArtistDAO(name_artist.getText().toUpperCase(), nacionaliti_artist.getText().toUpperCase(), url_artist.getText());
-				if(toadd.update()>0){
-					ShowAll();
-					url_artist.clear();
-					imge_artist.setImage(null);
-					name_artist.clear();
-					nacionaliti_artist.clear();
-					muestrinformacion("Información", "Artista creado correctamente", "  ");
-				}else{
-					muestraerror("Error", "No se ha podido crear", "Problema con la base de datos");
+	private void AddArtist() {
+		if (GeneralUtilities.ValidateURL(url_artist.getText()) && name_artist.getText().length() > 0
+				&& nacionaliti_artist.getText().length() > 0) {
+			if (!ArtistDAO.existArtist(name_artist.getText().toUpperCase())) {
+				if (confirm("Información", "¿Seguro que desea añadir Artista?", "   ")) {
+					ArtistDAO toadd = new ArtistDAO(name_artist.getText().toUpperCase(),
+							nacionaliti_artist.getText().toUpperCase(), url_artist.getText());
+					if (toadd.update() > 0) {
+						ShowAll();
+						url_artist.clear();
+						imge_artist.setImage(null);
+						name_artist.clear();
+						nacionaliti_artist.clear();
+						muestrinformacion("Información", "Artista creado correctamente", "  ");
+					} else {
+						muestraerror("Error", "No se ha podido crear", "Problema con la base de datos");
+					}
 				}
+			} else {
+				muestraerror("Error", "Artista existente", "Ya hay un artista con ese nombre");
 			}
-		}else{
+		} else {
 			muestraerror("Error", "No se ha podido crear", "Campos vacíos o incorrectos");
 		}
 	}
+
 	@FXML
-	private void viewImgArtist(){
+	private void deleteArtist() {
+		if (get != null) {
+			if (confirm("Informaciónn", "¿Eliminar Artista?", "   ")) {
+				ArtistDAO d = new ArtistDAO(get);
+				if (d.delete() > 0) {
+					artistlist_.remove(get);
+					ClearArtist();
+					muestrinformacion("Información", "Eliminado correctamente", "   ");
+				} else {
+					muestraerror("Error", "No se ha podido eliminar", "Problema con la base de datos");
+				}
+			}
+		}
+	}
+
+	@FXML
+	private void viewImgArtist() {
 		imge_artist.setImage(new Image(url_artist.getText()));
 	}
+
 	@FXML
-	private void viewImgDisck(){
+	private void viewImgDisck() {
 		imag_disc.setImage(new Image(url_disc.getText()));
 	}
+
 	@FXML
-	private void ClearDisc(){
-		disc=null;
-		song=null;
+	private void ClearDisc() {
+		disc = null;
+		song = null;
 		songlist.clear();
 		imag_disc.setImage(null);
 		url_disc.clear();
@@ -327,55 +376,94 @@ public class ArtistController extends GeneralController{
 		b_clear_song.setDisable(true);
 		b_edit_song.setDisable(true);
 
-
-
 	}
+
 	@FXML
-	private void EditDdisc(){
-		if(GeneralUtilities.ValidateURL(url_disc.getText())&&name_disc.getText().length()>0&&date_disc.getValue()!=null){
-			if(confirm("Información","¿Seguro que desea editar?", "   ")){
+	private void EditDdisc() {
+		if (GeneralUtilities.ValidateURL(url_disc.getText()) && name_disc.getText().length() > 0
+				&& date_disc.getValue() != null) {
+			boolean procede=false;
+			if(name_disc.getText().toUpperCase().equals(disc.getName())){
+				if(confirm("Información", "¿Seguro que desea editar?", "   ")){
+					procede=true;
+				}
+			}else{
+				if(!DiscDAO.ExistDisc(name_disc.getText().toUpperCase(), get.getId())){
+					if(confirm("Información", "¿Seguro que desea editar?", "   ")){
+						procede=true;
+					}
+				}else{
+					muestraerror("Error", "No se ha podido editar", "Disco existente");
+				}
+			}
+			if (procede) {
 				disc.setName(name_disc.getText().toUpperCase());
 				disc.setDate(date_disc.getValue());
 				disc.setPhoto(url_disc.getText());
-				DiscDAO toupdate=new DiscDAO(disc);
-				if(toupdate.update()>0){
+				DiscDAO toupdate = new DiscDAO(disc);
+				if (toupdate.update() > 0) {
 					get.setSynchro(false);
 					discarlist.clear();
 					discarlist.addAll(get.getDisclist());
 					muestrinformacion("Información", "Disco editado correctamente", "   ");
-				}else{
+				} else {
 					muestraerror("Error", "No se ha podido editar", "Problema con la base de datos");
 				}
 			}
-		}else{
+		} else {
 			muestraerror("Error", "No se ha podido editar", "Campos vacíos o incorrectos");
 		}
 	}
+
 	@FXML
-	private void AddDisc(){
-		if(GeneralUtilities.ValidateURL(url_disc.getText())&&name_disc.getText().length()>0&&date_disc.getValue()!=null){
-			if(confirm("Información","¿Seguro que desea añadir el disco?", "   ")){
-				DiscDAO toadd=new DiscDAO(name_disc.getText().toUpperCase(), get, url_disc.getText(), date_disc.getValue());
-				if(toadd.update()>0){
-					get.setSynchro(false);
-					discarlist.clear();
-					discarlist.addAll(get.getDisclist());
-					imag_disc.setImage(null);
-					name_disc.clear();
-					url_disc.clear();
-					muestrinformacion("Información", "Disco añadido correctamente", "   ");
-				}else{
-					muestraerror("Error", "No se ha podido crear", "Problema con la base de datos");
+	private void AddDisc() {
+		if (GeneralUtilities.ValidateURL(url_disc.getText()) && name_disc.getText().length() > 0
+				&& date_disc.getValue() != null) {
+			if (!DiscDAO.ExistDisc(name_disc.getText().toUpperCase(), get.getId())) {
+				if (confirm("Información", "¿Seguro que desea añadir el disco?", "   ")) {
+					DiscDAO toadd = new DiscDAO(name_disc.getText().toUpperCase(), get, url_disc.getText(),
+							date_disc.getValue());
+					if (toadd.update() > 0) {
+						get.setSynchro(false);
+						discarlist.clear();
+						discarlist.addAll(get.getDisclist());
+						imag_disc.setImage(null);
+						name_disc.clear();
+						url_disc.clear();
+						muestrinformacion("Información", "Disco añadido correctamente", "   ");
+					} else {
+						muestraerror("Error", "No se ha podido crear", "Problema con la base de datos");
+					}
 				}
+			} else {
+				muestraerror("Error", "Ese disco ya existe", "   ");
 			}
-		}else{
+		} else {
 			muestraerror("Error", "No se ha podido crear", "Campos vacíos o incorrectos");
 		}
 	}
+
 	@FXML
-	private void ShowSong(){
-		song=song_list.getSelectionModel().getSelectedItem();
-		if(song!=null){
+	private void deleteDisc() {
+		if (disc != null) {
+			if (confirm("Información", "¿Eliminar disco?", "   ")) {
+				DiscDAO d = new DiscDAO(disc);
+				if (d.delete() > 0) {
+					discarlist.remove(disc);
+					ClearDisc();
+					muestrinformacion("Información", "Disco eliminado correctamente", "    ");
+				} else {
+					muestraerror("Error", "No se ha podido eliminar", "Problema con la base de datos");
+				}
+			}
+		}
+	}
+
+	@FXML
+	private void ShowSong() {
+		song = song_list.getSelectionModel().getSelectedItem();
+		if (song != null) {
+			genero_song.setValue(null);
 			name_song.setText(song.getName());
 			genero_song.setValue(song.getGenre().getName());
 			duracion_song.setText(Integer.toString(song.getDuration()));
@@ -384,9 +472,10 @@ public class ArtistController extends GeneralController{
 			b_edit_song.setDisable(false);
 		}
 	}
+
 	@FXML
-	private void ClearSong(){
-		song=null;
+	private void ClearSong() {
+		song = null;
 		name_song.clear();
 		genero_song.setValue(null);
 		duracion_song.clear();
@@ -395,100 +484,139 @@ public class ArtistController extends GeneralController{
 		b_edit_song.setDisable(true);
 
 	}
+
 	@FXML
-	private void AddSong(){
-		if(name_song.getText().length()>0&&date_disc.getValue()!=null&&GeneralUtilities.ValidateNmber(duracion_song.getText())
-				&&genero_song.getValue()!=null){
-			if(confirm("Información","¿Seguro que desea añadir la canción?", "   ")){
-				Genre g=null;
-				for(Genre gs:GenreDAO.SelectALL()){
-					if(gs.getName().equals(genero_song.getValue())){
-						g=gs;
-						break;
+	private void AddSong() {
+		if (name_song.getText().length() > 0 && date_disc.getValue() != null
+				&& GeneralUtilities.ValidateNmber(duracion_song.getText()) && genero_song.getValue() != null) {
+			if (!SongDAO.ExistSong(disc.getId(), name_song.getText().toUpperCase())) {
+				if (confirm("Información", "¿Seguro que desea añadir la canción?", "   ")) {
+					Genre g = null;
+					for (Genre gs : GenreDAO.SelectALL()) {
+						if (gs.getName().equals(genero_song.getValue())) {
+							g = gs;
+							break;
+						}
+					}
+					SongDAO toadd = new SongDAO(name_song.getText().toUpperCase(),
+							Integer.parseInt(duracion_song.getText()), g, disc);
+					if (toadd.update() > 0) {
+						disc.setSynchro(false);
+						songlist.clear();
+						songlist.addAll(SongDAO.SelectForDisc(disc));
+						name_song.clear();
+						duracion_song.clear();
+						genero_song.setValue(null);
+						muestrinformacion("Información", "Canción añadida correctamente", "   ");
+					} else {
+						muestraerror("Error", "No se ha podido crear", "Problema con la base de datos");
 					}
 				}
-				SongDAO toadd=new SongDAO(name_song.getText().toUpperCase(), Integer.parseInt(duracion_song.getText()),g, disc);
-				if(toadd.update()>0){
-					disc.setSynchro(false);
-					songlist.clear();
-					songlist.addAll(SongDAO.SelectForDisc(disc));
-					name_song.clear();
-					duracion_song.clear();
-					genero_song.setValue(null);
-					muestrinformacion("Información", "Canción añadida correctamente", "   ");
-				}else{
-					muestraerror("Error", "No se ha podido crear", "Problema con la base de datos");
-				}
+			} else {
+				muestraerror("Error", "Esta canción ya existe", "   ");
 			}
-		}else{
+		} else {
 			muestraerror("Error", "No se ha podido crear", "Campos vacíos o incorrectos");
 		}
 	}
+
 	@FXML
-	private void EditSong(){
-		if(name_song.getText().length()>0&&date_disc.getValue()!=null&&GeneralUtilities.ValidateNmber(duracion_song.getText())
-				&&genero_song.getValue()!=null){
-			if(confirm("Información","¿Seguro que desea editar?", "   ")){
-				Genre g=null;
-				for(Genre gs:GenreDAO.SelectALL()){
-					if(gs.getName().equals(genero_song.getValue())){
-						g=gs;
+	private void deleteSong() {
+		if (song != null) {
+			if (confirm("Información", "¿Eliminar canción?", "    ")) {
+				SongDAO s = new SongDAO(song);
+				if (s.delete() > 0) {
+					songlist.remove(song);
+					ClearSong();
+					muestrinformacion("Información", "Canción eliminada correctamente", "   ");
+				} else {
+					muestraerror("Error", "No se ha podido eliminar", "Problema con la base de datos");
+				}
+			}
+		}
+	}
+
+	@FXML
+	private void EditSong() {
+		if (name_song.getText().length() > 0 && date_disc.getValue() != null
+				&& GeneralUtilities.ValidateNmber(duracion_song.getText()) && genero_song.getValue() != null) {
+			boolean procede = false;
+			if(name_song.getText().toUpperCase().equals(song.getName())){
+				if(confirm("Información", "¿Seguro que desea editar?", "   ")){
+					procede=true;
+				}
+			}else{
+				if(!SongDAO.ExistSong(disc.getId(), name_song.getText().toUpperCase())){
+					if(confirm("Información", "¿Seguro que desea editar?", "   ")){
+						procede=true;
+					}
+				}else{
+					muestraerror("Error", "No se ha podido editar", "Cancion Existente");
+				}
+			}
+			if (procede) {
+				Genre g = null;
+				for (Genre gs : GenreDAO.SelectALL()) {
+					if (gs.getName().equals(genero_song.getValue())) {
+						g = gs;
 						break;
 					}
 				}
 				song.setDuration(Integer.parseInt(duracion_song.getText()));
 				song.setName((name_song.getText().toUpperCase()));
 				song.setGenre(g);
-				SongDAO toupdate=new SongDAO(song);
-				if(toupdate.update()>0){
+				SongDAO toupdate = new SongDAO(song);
+				if (toupdate.update() > 0) {
 					disc.setSynchro(false);
 					songlist.clear();
 					songlist.addAll(SongDAO.SelectForDisc(disc));
 					muestrinformacion("Información", "Canción editada corectamente", "   ");
-				}else{
+				} else {
 					muestraerror("Error", "No se ha podido editar", "Problema con la base de datos");
 				}
 
 			}
-		}else{
+		} else {
 			muestraerror("Error", "No se ha podido editar", "Campos vacíos o incorrectos");
 		}
 	}
 
 	@FXML
-	private void ClikSearchbyNameArtist(){
-		if(busqueda_name_artis.isSelected()){
+	private void ClikSearchbyNameArtist() {
+		if (busqueda_name_artis.isSelected()) {
 			busqueda_nacionalidad_artis.setSelected(false);
 			t_b_artist.setDisable(false);
 			b_search_artist.setDisable(false);
-		}else{
+		} else {
 			t_b_artist.setDisable(true);
 			b_search_artist.setDisable(true);
 		}
 
 	}
+
 	@FXML
-	private void ClikSearchbyNacionalityArtist(){
-		if(busqueda_nacionalidad_artis.isSelected()){
+	private void ClikSearchbyNacionalityArtist() {
+		if (busqueda_nacionalidad_artis.isSelected()) {
 			busqueda_name_artis.setSelected(false);
 			t_b_artist.setDisable(false);
 			b_search_artist.setDisable(false);
-		}else{
+		} else {
 			t_b_artist.setDisable(true);
 			b_search_artist.setDisable(true);
 		}
 	}
+
 	@FXML
-	private void SearchArtist(){
-		if(busqueda_nacionalidad_artis.isSelected()){
-			if(t_b_artist.getText().length()>0){
+	private void SearchArtist() {
+		if (busqueda_nacionalidad_artis.isSelected()) {
+			if (t_b_artist.getText().length() > 0) {
 				ClearDisc();
 				artistlist_.clear();
 				artistlist_.addAll(ArtistDAO.SelectbyNacionalidad(t_b_artist.getText().toUpperCase()));
 			}
 
-		}else if(busqueda_name_artis.isSelected()){
-			if(t_b_artist.getText().length()>0){
+		} else if (busqueda_name_artis.isSelected()) {
+			if (t_b_artist.getText().length() > 0) {
 				ClearDisc();
 				artistlist_.clear();
 				artistlist_.addAll(ArtistDAO.SelectbyName(t_b_artist.getText().toUpperCase()));
